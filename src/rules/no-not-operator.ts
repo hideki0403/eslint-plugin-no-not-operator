@@ -67,9 +67,8 @@ export const rule = createRule({
 
                 const type = getType(node.argument);
                 const typeNode = typeChecker.typeToTypeNode(type, undefined, undefined);
-                const kind = typeNode?.kind;
 
-                if (kind === SyntaxKind.UnionType) {
+                if (typeNode?.kind === SyntaxKind.UnionType) {
                     const syntaxKinds = (typeNode as any).types.map((item: any) => {
                         return item.kind === SyntaxKind.LiteralType ? item.literal.kind : item.kind;
                     }) as SyntaxKind[];
