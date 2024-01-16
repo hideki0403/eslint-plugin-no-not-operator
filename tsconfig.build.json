@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "pretty": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2021",
+        "lib": [
+            "es2021"
+        ],
+        "skipLibCheck": true,
+        "declaration": false,
+        "declarationMap": false,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "resolveJsonModule": true
+    },
+    "include": [
+        "src",
+    ]
+}
