@@ -1,24 +1,27 @@
 import { SyntaxKind } from 'typescript';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/experimental-utils';
+import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
 
 const createRule = ESLintUtils.RuleCreator(
     () => `https://github.com/hideki0403/eslint-plugin-no-not-operator/`
 );
 
-export const rule = createRule({
+type Options = ['always' | 'nullable'];
+type MessageIds = 'disallowNotOperator' | 'disallowNotOperatorNullable';
+
+export const rule = createRule<Options, MessageIds>({
     name: 'no-not-operator-nullable',
     meta: {
         docs: {
             description: 'Disallow not operator.',
-            recommended: 'warn',
+            recommended: 'recommended',
         },
         fixable: 'code',
         schema: {
             type: 'array',
             items: {
+                type: 'string',
                 enum: ['always', 'nullable'],
             },
-            additionalProperties: false,
         },
         messages: {
             disallowNotOperator: 'Disallow not operator. Please use comparison operator.',
@@ -26,9 +29,9 @@ export const rule = createRule({
         },
         type: 'problem',
     },
-    defaultOptions: [] as ('always' | 'nullable')[],
+    defaultOptions: ['always'],
     create(context) {
-        const config: string = context.options[0] ?? 'always';
+        const config = context.options[0];
         const parserServices = ESLintUtils.getParserServices(context);
         const typeChecker = parserServices.program.getTypeChecker();
 
@@ -39,12 +42,12 @@ export const rule = createRule({
             return type !== null && type !== undefined ? type : nodeType;
         }
 
-        function report(node: TSESTree.UnaryExpression, messageId: any, hasNull = false, hasUndefined = false) {
+        function report(node: TSESTree.UnaryExpression, messageId: MessageIds, hasNull = false, hasUndefined = false) {
             context.report({
                 node,
                 messageId,
                 fix: hasNull || hasUndefined ? (fixer) => {
-                    const sourceCode = context.getSourceCode();
+                    const sourceCode = context.sourceCode;
                     const token = sourceCode.getTokenAfter(node);
                     const plainText = sourceCode.getText(node.argument);
 

@@ -1,7 +1,7 @@
-import { ESLintUtils } from '@typescript-eslint/experimental-utils';
+import { RuleTester } from '@typescript-eslint/rule-tester';
 import { rule } from '../src/rules/no-not-operator'
 
-const ruleTester = new ESLintUtils.RuleTester({
+const ruleTester = new RuleTester({
     parserOptions: {
         sourceType: 'module',
         project: ['./tsconfig.json'],
