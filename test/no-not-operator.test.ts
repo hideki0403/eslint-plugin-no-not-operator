@@ -72,6 +72,22 @@ ruleTester.run('no-not-operator', rule, {
         },
         {
             code: `
+                const boolValue = true as boolean | undefined
+                const foo = 'bar'
+                if (!boolValue || foo === 'bar') {}
+            `,
+            errors: [{
+                messageId: 'disallowNotOperatorNullable',
+            }],
+            output: `
+                const boolValue = true as boolean | undefined
+                const foo = 'bar'
+                if (boolValue === undefined || foo === 'bar') {}
+            `,
+            options: ['nullable'],
+        },
+        {
+            code: `
                 const boolValue = true as boolean | null
                 if (!boolValue) {}
             `,
