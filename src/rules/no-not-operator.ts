@@ -8,7 +8,7 @@ const createRule = ESLintUtils.RuleCreator(
 type Options = ['always' | 'nullable'];
 type MessageIds = 'disallowNotOperator' | 'disallowNotOperatorNullable';
 
-export const rule = createRule<Options, MessageIds>({
+export default createRule<Options, MessageIds>({
     name: 'no-not-operator-nullable',
     meta: {
         docs: {
