@@ -1,10 +1,13 @@
 import config from './config/config.json'
 
-export = {
+// rules
+import noNotOperator from './rules/no-not-operator'
+
+export default {
     configs: {
         config
     },
     rules: {
-        'no-not-operator': require('./rules/no-not-operator'),
+        'no-not-operator': noNotOperator,
     }
 }
