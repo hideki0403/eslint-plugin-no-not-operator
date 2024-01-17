@@ -1,5 +1,5 @@
 import { RuleTester } from '@typescript-eslint/rule-tester';
-import { rule } from '../src/rules/no-not-operator'
+import rule from '../src/rules/no-not-operator'
 
 const ruleTester = new RuleTester({
     parserOptions: {
