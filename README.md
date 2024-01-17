@@ -13,9 +13,9 @@ npm install --save-dev eslint @hideki0403/eslint-plugin-no-not-operator
 ```js
 // .eslintrc.js
 module.exports = {
-  plugins: ['no-not-operator'],
+  plugins: ['@hideki0403/no-not-operator'],
   rules: {
-    'no-not-operator/no-not-operator': ['error', OPTION], // OPTION: 'always' or 'nullable'
+    '@hideki0403/no-not-operator/no-not-operator': ['error', OPTION], // OPTION: 'always' or 'nullable'
   },
 };
 ```
