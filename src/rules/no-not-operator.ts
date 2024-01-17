@@ -48,14 +48,13 @@ export default createRule<Options, MessageIds>({
                 messageId,
                 fix: hasNull || hasUndefined ? (fixer) => {
                     const sourceCode = context.sourceCode;
-                    const token = sourceCode.getTokenAfter(node);
                     const plainText = sourceCode.getText(node.argument);
 
                     const replaceTexts: string[] = []
                     if (hasNull) replaceTexts.push(`${plainText} === null`);
                     if (hasUndefined) replaceTexts.push(`${plainText} === undefined`);
 
-                    return fixer.replaceTextRange([node.range[0], token!.range[1] - 1], replaceTexts.join(' || '));
+                    return fixer.replaceTextRange(node.range, replaceTexts.join(' || '));
                 } : undefined,
             });
         }
