@@ -1,5 +1,5 @@
 {
-	"name": "eslint-plugin-no-not-operator",
+	"name": "@hideki0403/eslint-plugin-no-not-operator",
 	"version": "0.0.1",
 	"repository": "git@github.com:hideki0403/eslint-plugin-no-not-operator.git",
 	"author": "yukineko",
