@@ -66,7 +66,7 @@ ruleTester.run('no-not-operator', rule, {
             }],
             output: `
                 const boolValue = true as boolean | undefined
-                if (boolValue === undefined) {}
+                if (boolValue == null) {}
             `,
             options: ['nullable'],
         },
@@ -82,7 +82,7 @@ ruleTester.run('no-not-operator', rule, {
             output: `
                 const boolValue = true as boolean | undefined
                 const foo = 'bar'
-                if (boolValue === undefined || foo === 'bar') {}
+                if (boolValue == null || foo === 'bar') {}
             `,
             options: ['nullable'],
         },
@@ -96,7 +96,7 @@ ruleTester.run('no-not-operator', rule, {
             }],
             output: `
                 const boolValue = true as boolean | null
-                if (boolValue === null) {}
+                if (boolValue == null) {}
             `,
             options: ['nullable'],
         },
@@ -110,7 +110,7 @@ ruleTester.run('no-not-operator', rule, {
             }],
             output: `
                 const boolValue = true as boolean | undefined | null
-                if (boolValue === null || boolValue === undefined) {}
+                if (boolValue == null) {}
             `,
             options: ['nullable'],
         },
@@ -124,7 +124,7 @@ ruleTester.run('no-not-operator', rule, {
             }],
             output: `
                 const boolObject: { value?: boolean } = { value: true }
-                if (boolObject.value === undefined) {}
+                if (boolObject.value == null) {}
             `,
             options: ['nullable'],
         },

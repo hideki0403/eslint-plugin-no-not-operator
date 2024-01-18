@@ -42,19 +42,14 @@ export default createRule<Options, MessageIds>({
             return type !== null && type !== undefined ? type : nodeType;
         }
 
-        function report(node: TSESTree.UnaryExpression, messageId: MessageIds, hasNull = false, hasUndefined = false) {
+        function report(node: TSESTree.UnaryExpression, messageId: MessageIds, fixable = false) {
             context.report({
                 node,
                 messageId,
-                fix: hasNull || hasUndefined ? (fixer) => {
+                fix: fixable ? (fixer) => {
                     const sourceCode = context.sourceCode;
                     const plainText = sourceCode.getText(node.argument);
-
-                    const replaceTexts: string[] = []
-                    if (hasNull) replaceTexts.push(`${plainText} === null`);
-                    if (hasUndefined) replaceTexts.push(`${plainText} === undefined`);
-
-                    return fixer.replaceTextRange(node.range, replaceTexts.join(' || '));
+                    return fixer.replaceTextRange(node.range, `${plainText} == null`);
                 } : undefined,
             });
         }
@@ -80,7 +75,7 @@ export default createRule<Options, MessageIds>({
 
                     if (!hasUndefined && !hasNull) return;
 
-                    return report(node, 'disallowNotOperatorNullable', hasNull, hasUndefined);
+                    return report(node, 'disallowNotOperatorNullable', true);
                 }
             },
         };
